@@ -1,0 +1,14 @@
+1) Explain how a typical HTTP request is processed with the framework (the request lifecycle)
+	First the browser needs to translate the URL to an IP address. If it does not know it, it contacts a DNS server to resolve the name.
+	Then the browser will open a TCP connection to the IP address and send a HTTP GET request over.
+	The server software will get this HTTP request. It will somehow generate a HTTP response and send that back trough the TCP connection. 
+	How the server does this is server software dependent.
+	When the browser gets the response, it typically renders it on screen. The HTTP request is now done.
+
+2) Why should GET requests be idempotent?
+	Idempotent: Get always the same result with multiple requests.
+	When you use GET, nothing should be changed on the server. When you use POST, you add additional data to the server and a new request
+	wouldnt deliver the same. So POST isnt idempotent, on the contrary to GET.
+
+3) Where should you format data for rendering?
+	The data should be formated in a css file! So the whole design-part is separeted. It can also be formated in the template (haml).
