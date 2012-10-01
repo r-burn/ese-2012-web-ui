@@ -1,0 +1,17 @@
+%link(rel="stylesheet" type="text/css" href="/style.css")
+%h1 Webstore
+%a{:href => "/logout"} Logout
+%h2 Items of #{us}
+%ul
+  -for i in Store::User.by_name(us).items
+    %li
+      -if i.active?
+        #{i.name} - Price: #{i.price} - to sell
+      -else
+        #{i.name} - Price: #{i.price} - not to sell
+
+%a{:href => "/"} Back
+
+
+%hr
+Time: #{time.strftime("%H:%M:%S")}

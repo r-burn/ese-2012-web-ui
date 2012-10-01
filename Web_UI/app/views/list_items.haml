@@ -1,0 +1,21 @@
+%link(rel="stylesheet" type="text/css" href="/style.css")
+%h1 Webstore
+%a{:href => "/logout"} Logout
+%h2 Your Credits: #{current_user.credits}
+%h2 Items of #{current_name}
+%ul
+  -for i in current_user.items
+    %li
+      #{i.name} - Price: #{i.price}
+
+%h2 Items on Sale
+%ul
+  - for user in users
+    -for i in user.items
+      - if i.active?
+        %li #{i.name} - Price: #{i.price} - Owner:
+        %a{:href => "/profiles/#{i.owner.name}"}#{i.owner.name} -
+        %a{:href => "/buy/#{i.owner.name}/#{i.name}"} Buy It!
+
+%hr
+Time: #{time.strftime("%H:%M:%S")}
