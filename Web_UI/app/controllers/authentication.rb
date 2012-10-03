@@ -17,7 +17,8 @@ class Authentication < Sinatra::Application
     # Here, authentication succeeds if username==password
     # In a real application, we would of
     # course check the password differently.
-    fail "Username or password are not valid" if user.nil? or password != name
+    redirect '/login' if user.nil?
+    fail "Username or password are not valid" if password != name
 
     session[:name] = name
     redirect '/'

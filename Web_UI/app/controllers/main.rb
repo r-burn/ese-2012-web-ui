@@ -19,8 +19,12 @@ class Main < Sinatra::Application
     puts(items)
     item = items.detect {|i| i.name == params[:item]}
     user = Store::User.by_name(session[:name])
-    user.buy(item)
-    redirect '/'
+    if user.credits >= item.price  && item.active?
+      user.buy(item)
+      redirect '/'
+    else
+      redirect '/error'
+    end
   end
 
 
@@ -35,6 +39,11 @@ class Main < Sinatra::Application
                                       :users => Store::User.all,
                                       :current_user => user,
                                       :current_name => session[:name] }
+  end
+
+
+  get '/error' do
+    fail "You cant buy this item"
   end
 
   post "/" do
